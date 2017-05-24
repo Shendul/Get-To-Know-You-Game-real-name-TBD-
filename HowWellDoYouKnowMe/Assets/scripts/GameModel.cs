@@ -10,9 +10,10 @@ public class GameModel {
 	public static int totalRounds = 3; //TODO: make this customizable.
 	public static int currentRound = 0;
 	public static Camera camera;
-	public static int questionAnswer;
+	public static string questionAnswer;
 	public static string turn;
 	public static List<int> questionIndicesUsed = new List<int>();
+    public static Question currentQuestion;
 
 	public static List<Question> questionsList = new List<Question>() {
 		new Question(

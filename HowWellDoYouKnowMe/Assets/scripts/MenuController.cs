@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class MenuController : MonoBehaviour {
 		Debug.Log (GameModel.numberOfTeams);
 		GameModel.teamScoreList = new int[GameModel.numberOfTeams];
 		GameModel.currentRound = 1;
-		Application.LoadLevel("game_scene");
+        SceneManager.LoadScene("game_scene");
 		GameModel.turn = "Q";
 	}
 	

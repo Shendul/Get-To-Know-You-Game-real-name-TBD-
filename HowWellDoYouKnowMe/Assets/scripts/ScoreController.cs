@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreController : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class ScoreController : MonoBehaviour {
 	
 	public void StartNextRound () {
 		GameModel.currentRound++;
-		Application.LoadLevel("game_scene");
+        SceneManager.LoadScene("game_scene");
 		GameModel.turn = "Q";
 	}
 }
