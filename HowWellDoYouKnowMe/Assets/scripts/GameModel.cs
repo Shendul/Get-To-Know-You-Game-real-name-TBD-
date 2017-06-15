@@ -7,13 +7,14 @@ public class GameModel {
 	public static int[] teamScoreList; 
 	public static int currentTeam = 0;
 	public static int currentPlayer = 0;
-	public static int totalRounds = 3; //TODO: make this customizable.
+	public static int totalRounds = 0;
 	public static int currentRound = 0;
 	public static Camera camera;
 	public static string questionAnswer;
 	public static string turn;
 	public static List<int> questionIndicesUsed = new List<int>();
     public static Question currentQuestion;
+    public static bool answeredCorrectly = false;
 
 	public static List<Question> questionsList = new List<Question>() {
 		new Question(
@@ -68,7 +69,7 @@ public class GameModel {
 			"Which brand of truck do you prefer?",
 			new string[] {"Ford", "Chevy", "Dodge", "Toyota"}),
 		new Question(
-			"GameModel.Which brand of sports car do you prefer?",
+			"Which brand of sports car do you prefer?",
 			new string[] {"Ferrari", "Lamborghini", "Porsche", "Aston Martin"}),
 		new Question(
 			"Which brand of luxury car do you prefer?",

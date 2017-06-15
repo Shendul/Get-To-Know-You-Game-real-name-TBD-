@@ -5,11 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class ScoreController : MonoBehaviour {
 
-	public GameObject scoresText;
+    public AudioSource errorSound;
+    public AudioSource correctSound;
+    public GameObject scoresText;
 
 	// Use this for initialization
 	void Start () {
-		string scoresString = "";
+        if (GameModel.answeredCorrectly) {
+            correctSound.Play();
+        } else {
+            errorSound.Play();
+        }
+		string scoresString = "End of round " + GameModel.currentRound + ":\n\n";
 		for (int i = 0; i < GameModel.numberOfTeams; i++){
 			scoresString += "Team " + i + "'s Score: ";
 			scoresString += GameModel.teamScoreList[i];

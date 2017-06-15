@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class AnswerCorrectlyController : MonoBehaviour {
 
+    public AudioSource correctSound;
     public GameObject scoresText;
 
     // Use this for initialization
     void Start()
     {
+        correctSound.Play();
         string scoresString = "Your Answers Matched! +1 Score!\n\n";
         for (int i = 0; i < GameModel.numberOfTeams; i++)
         {

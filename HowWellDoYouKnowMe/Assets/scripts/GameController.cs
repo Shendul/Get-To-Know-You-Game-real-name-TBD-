@@ -10,32 +10,42 @@ public class GameController : MonoBehaviour {
 	public GameObject button2;
 	public GameObject button3;
 	public GameObject descriptionText;
+    public GameObject popUpCanvas;
 
 	// Use this for initialization
 	void Start () {
 		UpdateUIForNextTurn();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-	
-	// Logic to handle button presses
-	public void HandleButtonPress (GameObject buttonText) {
+
+    // Use this for explaining how to play the game.
+    public void ClosePopUpWindow()
+    {
+        Debug.Log("Closing Pop Up");
+        popUpCanvas.SetActive(false);
+    }
+
+    // Logic to handle button presses
+    public void HandleButtonPress (GameObject buttonText) {
 		Debug.Log ("Button: " + buttonText + " Pressed");
 		bool roundOver = false;
         string buttonString = buttonText.GetComponent<Text>().text;
         if (GameModel.turn == "A")
 		{
-			GameModel.turn = "Q";
+            GameModel.turn = "Q";
 			if (AnswerMatches(buttonString))
 			{
 				// TODO: maybe fix the end round overriding this score screen
 				GameModel.teamScoreList[GameModel.currentTeam] += 1;
+                GameModel.answeredCorrectly = true;
                 SceneManager.LoadScene("answered_correctly_scene");
             } else {
                 //TODO: maybe fix the end round overriding this score screen
+                GameModel.answeredCorrectly = false;
                 SceneManager.LoadScene("answered_incorrectly_scene");
 
             }
@@ -93,6 +103,9 @@ public class GameController : MonoBehaviour {
             GameModel.currentQuestion = GameModel.questionsList[nextQuestionIndex];
             Debug.Log("Current Turn: " + GameModel.turn);
             descriptionText.GetComponent<Text>().text = GameModel.currentQuestion.description;
+        } else { // used to alert the player to pass the phone over.
+            Debug.Log("Opening Pop Up Window");
+            popUpCanvas.SetActive(true);
         }
         //used to generate a random list of answers
         for (int t = 0; t < GameModel.currentQuestion.answers.Length; t++)

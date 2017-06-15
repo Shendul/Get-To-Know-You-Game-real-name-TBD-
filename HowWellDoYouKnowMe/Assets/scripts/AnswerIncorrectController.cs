@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class AnswerIncorrectController : MonoBehaviour {
 
+    public AudioSource errorSound;
     public GameObject scoresText;
 
     // Use this for initialization
     void Start()
     {
+        errorSound.Play();
         string scoresString = "Your Answers did not Match!\n\n";
         for (int i = 0; i < GameModel.numberOfTeams; i++)
         {

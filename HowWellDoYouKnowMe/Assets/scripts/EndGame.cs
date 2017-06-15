@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour {
 
+    public AudioSource endGameSound;
 	public GameObject endScoresText;
 
 	// Use this for initialization
 	void Start () {
+        endGameSound.Play();
 		string endScoresString = "";
         int winnersIndex = 0;
         bool isTie = false;
@@ -16,11 +18,18 @@ public class EndGame : MonoBehaviour {
             Debug.Log("End Scoring comparison (i): " + i);
             Debug.Log("End Scoring comparison (end point): " + (GameModel.numberOfTeams));
             if (GameModel.teamScoreList[i] > GameModel.teamScoreList[winnersIndex]) {
-                winnersIndex = i;
-                isTie = false;
-                Debug.Log( (GameModel.teamScoreList[i]) + " > " + (GameModel.teamScoreList[winnersIndex]) );
+                Debug.Log((GameModel.teamScoreList[i]) + " > " + (GameModel.teamScoreList[winnersIndex]));
+                // hack to make tie games actually work.
+                if (winnersIndex != i) // winnersIndex has changed.
+                {
+                    winnersIndex = i;
+                    isTie = false;
+                } else {
+                    // this makes it so that if there was a tie at anypoint and a new winner has not
+                    // been declared than the isTie bool will still be true.
+                }
             } else if (GameModel.teamScoreList[i] < GameModel.teamScoreList[winnersIndex]) {
-                isTie = false;
+            
                 Debug.Log((GameModel.teamScoreList[i]) + " < " + (GameModel.teamScoreList[winnersIndex]));
             } else { isTie = true; Debug.Log("End Scoring inside tie conditon"); }
         }
